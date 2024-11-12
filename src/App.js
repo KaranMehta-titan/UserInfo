@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import ThemeContext from "./appContext/themeContext";
+import UserTable from "./components/Usertable";
+import UserInfoContext from "./appContext/userInfoContext";
+import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
+  const [theme, setTheme] = useState("dark");
+  const [userInfo, setUserInfo] = useState(null);
+  // ...
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <UserInfoContext.Provider value={{ userInfo, setUserInfo }}>
+        <UserTable />
+      </UserInfoContext.Provider>
+      <ThemeToggle />
+    </ThemeContext.Provider>
   );
 }
 
